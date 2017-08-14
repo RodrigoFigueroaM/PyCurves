@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-
 from Point import Point
+
+
 class CatmullRom:
     def __init__(self):
         super(CatmullRom,self).__init__()
@@ -102,7 +103,8 @@ class CatmullRomSpline:
                        p1.x(), p1.y(), p1.z(), 0,
                        p2.x(), p2.y(), p2.z(), 0,
                        p3.x(), p3.y(), p3.z(), 0)
-        point = 0.5 * QVector4D(1.0, t, t*t, t*t*t) * M * P
+        vecT = QVector4D(1.0, t, t*t, t*t*t)
+        point = 0.5 * vecT * M * P
         return QVector3D(point.x(), point.y(), point.z())
 
 
