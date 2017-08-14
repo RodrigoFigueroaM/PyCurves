@@ -1,2 +1,3 @@
 .idea
-./Subdiv
+Subdiv
+__pycache__/
