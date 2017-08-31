@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 from Point import Point
+from BaseSpline import BaseSpline
 
-
-class CatmullRom:
+class CatmullRom(BaseSpline):
     def __init__(self):
-        super(CatmullRom,self).__init__()
-        self.points = []
-        self.userDefinedPoints=[]
+        super(CatmullRom, self).__init__()
 
     def compute(self, userDefinedPoints):
         self.points = [] #make sure our points to be ploted is empty
-        self.userDefinedPoints = userDefinedPoints
-        #we need at least 4 points to define a Catmull-Rom Spline
+        self.controlPoints = userDefinedPoints
+        # We need at least 4 points to define a Catmull-Rom Spline
         if len(userDefinedPoints) >= 4:
             i = 0
             while  i < len(userDefinedPoints) - 3 :
@@ -34,10 +32,11 @@ class CatmullRom:
             self.points.append( point)
             t += 0.1
 
+
 from PyQt5.QtGui import QVector3D, QVector4D, QMatrix4x4
 
 
-class CatmullRomSpline:
+class CatmullRomSpline(BaseSpline):
     """
     A CatmullRom spline implementation dependant on PyQt's
     QVector3D, QVector4D, QMatrix4x4
@@ -48,10 +47,7 @@ class CatmullRomSpline:
         A curve can be computed with given control points
         :param controlPoints: if specified, control points is a list of QVector3D
         """
-        self.controlPoints = []
-        if controlPoints:
-            self.controlPoints = controlPoints[:]
-        self.points = []
+        super(CatmullRomSpline, self).__init__(controlPoints)
 
     def compute(self, controlPoints=None):
         """
@@ -114,7 +110,7 @@ if __name__ == "__main__":
     spline.compute([Point(0, 0, 0), Point(0, 1, 0), Point(1, 1, 0), Point(1, 0, 0)])
     for point in spline.points:
         print(point)
-
+    print("Using Matrices")
     print("---------------------- NEW CATMULL ----------------------")
     vectorSpline = CatmullRomSpline([QVector3D(0, 0, 0), QVector3D(0, 1, 0), QVector3D(1, 1, 0), QVector3D(1, 0, 0)])
     vectorSpline.compute()

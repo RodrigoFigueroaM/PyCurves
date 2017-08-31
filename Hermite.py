@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 from Point import Point
+from BaseSpline import BaseSpline
 
 
-class HermiteCurve:
+class HermiteCurve(BaseSpline):
     def __init__(self, *argv):
         '''
         HermiteCurve needs 2 points(p0, p1) and 2 tangents(m0, m1) in order to be plotted.
@@ -38,11 +39,12 @@ class HermiteCurve:
             t += 0.1
 
 from PyQt5.QtGui import QVector4D, QMatrix4x4, QVector3D
+from BaseSpline import BaseSpline
 
-
-class HermiteSpline:
+class HermiteSpline(BaseSpline):
     def __init__(self, p0, m0, p1, m1):
         """Given : Points P0, P1 Tangent vectors m0, m1 """
+        super(HermiteSpline, self).__init__()
         self.points = []
         self.p0 = p0
         self.m0 = m0
@@ -91,6 +93,7 @@ if __name__ == "__main__":
     for point in hermite.points:
         print(point)
 
+    print("Using Matrices")
     hermiteSpline = HermiteSpline(QVector3D(0, 0, 0), QVector3D(0, 1, 0), QVector3D(1, 1, 0), QVector3D(1, 0, 0))
     hermiteSpline.compute()
     for point in hermiteSpline.points:

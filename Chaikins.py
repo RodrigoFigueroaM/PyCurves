@@ -28,6 +28,7 @@ class Chaikins:
         if dept:
             self.dept = dept
         tempContolPoints = self.controlPoints[:]
+        print('dept',self.dept)
         for n in range(0, self.dept):
             self._points = []
             for i in range(0, len(tempContolPoints) - 1):
@@ -54,7 +55,7 @@ class Chaikins:
 
 
 if __name__ == "__main__":
-    spline = Chaikins([QVector3D(0,0,0), QVector3D(0,2,0), QVector3D(2,2,0), QVector3D(3,-1,0),QVector3D(6,3,0)],4)
+    spline = Chaikins([QVector3D(0,0,0), QVector3D(0,2,0), QVector3D(2,2,0), QVector3D(3,-1,0),QVector3D(6,3,0)])
     spline.compute()
     print("controlPoints")
     for vec in spline.controlPoints:
